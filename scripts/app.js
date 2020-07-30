@@ -10,7 +10,6 @@ const humidity = document.querySelector('.humidity');
 const tempMax = document.querySelector('.tmax');
 const tempMin = document.querySelector('.tmin');
 
-
 let $cityName;
 let $currentCondition;
 let $currentConditionIcon;
@@ -61,7 +60,6 @@ const actionFetch = function(){
     })
 }
 
-
 function getCity(){
     let cityLocalStorage = localStorage.getItem('$city');
     
@@ -83,14 +81,8 @@ function getInputCity(event){
     actionFetch();
 }
 
-  
-
-
-
 getCity();
-
 inputCity.addEventListener('change', getInputCity);
-
 form.addEventListener('submit', function(event){
     event.preventDefault();
 })
