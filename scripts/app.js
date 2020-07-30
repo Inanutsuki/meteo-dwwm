@@ -3,6 +3,7 @@ const city = document.querySelector('.city');
 const currentCondition = document.querySelector('.current_condition');
 const temperature = document.querySelector('.temperature');
 const currentConditionIcon = document.querySelector('.current_condition_icon');
+const form = document.querySelector('.search-form');
 const inputCity = document.querySelector('.input_city');
 const hour = document.querySelector('.hour');
 const humidity = document.querySelector('.humidity');
@@ -88,4 +89,8 @@ function getInputCity(event){
 
 getCity();
 
-inputCity.addEventListener('change', getInputCity)
+inputCity.addEventListener('change', getInputCity);
+
+form.addEventListener('submit', function(event){
+    event.preventDefault();
+})
