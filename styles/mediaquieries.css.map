@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,MAAM,CAAC,MAAM,MAAM,SAAS,EAAE,KAAK;EAC/B,AACI,YADQ,CACN,WAAW,CAAA;IACT,OAAO,EAAE,CAAC;GACb;EAHL,AAII,YAJQ,CAIN,IAAI,CAAC;IACH,OAAO,EAAE,IAAI;GAChB;EAEL,AAAA,IAAI,AAAA,KAAK,CAAC;IACN,cAAc,EAAE,MAAM;IACtB,eAAe,EAAE,MAAM;IACvB,WAAW,EAAE,MAAM;GACtB",
+    "sources": [
+        "mediaquieries.scss"
+    ],
+    "names": [],
+    "file": "mediaquieries.css"
+}

@@ -1,0 +1,107 @@
+/*Reset CSS*/
+ul, li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+/*End reset CSS*/
+
+/*Variables*/
+$marginTop: 5px;
+
+/*End variables*/
+
+.wrapper {
+    font-family: 'Roboto', Helvetica, sans-serif;
+    color: #444;
+    max-width: 900px;
+    min-width: 300px;
+    margin: auto;
+
+    & .page {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    & .city {
+        text-align: center;
+    }
+
+    & .left {
+        li {
+            margin-top: $marginTop;
+        }
+    }
+
+    & .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        & .temp_min-max {
+            margin-top: $marginTop;
+        }
+    }
+}
+
+.tabs {
+    margin-top: $marginTop;
+    &:after {
+        display: table;
+        content: ' ';
+        clear: both;
+    }
+
+    &-content {
+        z-index: 3;
+        position: relative;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+
+    & li {
+        float: left;
+        display: block;
+    }
+
+    & a {
+        padding: 10px;
+        display: inline-block;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        & .link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    & .active {
+        & a {
+            background-color: #f1f1f1;
+        }
+    }
+}
+
+.tab {
+    &-content {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+}

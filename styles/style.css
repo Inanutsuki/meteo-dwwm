@@ -1,1 +1,122 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+/*Reset CSS*/
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*End reset CSS*/
+/*Variables*/
+/*End variables*/
+.wrapper {
+  font-family: 'Roboto', Helvetica, sans-serif;
+  color: #444;
+  max-width: 900px;
+  min-width: 300px;
+  margin: auto;
+}
+
+.wrapper .page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .city {
+  text-align: center;
+}
+
+.wrapper .left li {
+  margin-top: 5px;
+}
+
+.wrapper .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .right .temp_min-max {
+  margin-top: 5px;
+}
+
+.tabs {
+  margin-top: 5px;
+}
+
+.tabs:after {
+  display: table;
+  content: ' ';
+  clear: both;
+}
+
+.tabs-content {
+  z-index: 3;
+  position: relative;
+  padding: 20px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.tabs li {
+  float: left;
+  display: block;
+}
+
+.tabs a {
+  padding: 10px;
+  display: inline-block;
+  -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.tabs a .link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.tabs .active a {
+  background-color: #f1f1f1;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metéo DWWM</title>
+
+    <!--CSS bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!--CSS Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <!--CSS perso-->
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/mediaquieries.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="header">
+            <nav class="navbar ">
+                <a class="navbar-brand" href="#">
+                    <img src="assets/logo.png" width="50" height="50" class="d-inline-block align-top" alt=""
+                        loading="lazy">
+                </a>
+                <form class="form-inline search-form">
+                    <input class="form-control input_city" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </nav>
+        </div>
+        <div class="container">
+            <h2 class="city"></h2>
+            <div class="row page">
+                <div class="col col-auto left order-2 order-sm-1">
+                    <ul>
+                        <li class="hour"></li>
+                        <li class="temperature"></li>
+                        <li class="current_condition"></li>
+                        <li class="humidity"></li>
+                        <li class="wind_spd"></li>
+                        <li class="wind_dir"></li>
+                    </ul>
+                </div>
+                <div class="col col-auto right order-1 order-sm-2">
+                    <div class="current_condition_icon"></div>
+                    <div class="temp_min-max"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="tabs_wrapper">
+                <ul class="tabs">
+                    <li class="active"><a href="#day_one"><div class="link"></div></a></li>
+                    <li><a href="#day_two"><div class="link"></div></a></li>
+                    <li><a href="#day_three"><div class="link"></div></a></li>
+                    <li><a href="#day_four"><div class="link"></div></a></li>
+                    <li><a href="#day_five"><div class="link"></div></a></li>
+                </ul>
+                <div class="tabs-content">
+                    <div id="day_one" class="row tab-content active">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui ab unde ipsum temporibus ipsam suscipit repellat natus! Magnam recusandae repudiandae reprehenderit tempore, vero soluta, excepturi, dignissimos fuga nulla esse iste!</div>
+                    <div id="day_two" class="row tab-content"> Sit amet, consectetur adipisicing elit. Consequatur perspiciatis aut consequuntur quo tempora quos tenetur doloremque, tempore animi et dolorem ipsa iusto veritatis voluptate quia architecto ullam. Vero, nostrum.</div>
+                    <div id="day_three" class="row tab-content">Consectetur adipisicing elit. Consequatur perspiciatis aut consequuntur quo tempora quos tenetur doloremque, tempore animi et dolorem ipsa iusto veritatis voluptate quia architecto ullam. Vero, nostrum.</div>
+                    <div id="day_four" class="row tab-content">Consequatur perspiciatis aut consequuntur quo tempora quos tenetur doloremque, tempore animi et dolorem ipsa iusto veritatis voluptate quia architecto ullam. Vero, nostrum.</div>
+                    <div id="day_five" class="row tab-content">Consequuntur quo tempora quos tenetur doloremque, tempore animi et dolorem ipsa iusto veritatis voluptate quia architecto ullam. Vero, nostrum.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Scripts bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <!--Scripts perso-->
+    <script src="scripts/app.js"></script>
+</body>
+
+</html>
