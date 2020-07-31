@@ -63,29 +63,29 @@ let $url;
 
 /**ne les reconnait plus comme etant des variables ??? */
 
-function putInfoIn() {
-    let number = [
-        One
-    ]
-    for (let i = 0; i < number.length; i++) {
+// function putInfoIn() {
+//     let number = [
+//         One
+//     ]
+//     for (let i = 0; i < number.length; i++) {
 
-        let day = [
-            // $shortDayOne,
-            // $currentConditionIconDayOne,
-            // $tempMinDayOne,
-            // $tempMaxDayOne
-        ]
-        let a = $shortDay + number[i, 0];
-        let b = $currentConditionIconDay + number[i, 0];
-        let c = $tempMinDay + number[i, 0];
-        let d = $tempMaxDay + number[i, 0];
-        day.push(a, b, c, d)
-        for (let i = 0; i < day.length; i++) {
-            console.log(day[i]);
-            dayOneLink.innerHTML = '<div>' + day[i, 0] + '</div><img src="' + day[i, 1] + '"></img><div>' + day[i, 2] + '°C / ' + day[i, 3] + '°C</div>';
-        }
-    }
-}
+//         let day = [
+//             // $shortDayOne,
+//             // $currentConditionIconDayOne,
+//             // $tempMinDayOne,
+//             // $tempMaxDayOne
+//         ]
+//         let a = $shortDay + number[i, 0];
+//         let b = $currentConditionIconDay + number[i, 0];
+//         let c = $tempMinDay + number[i, 0];
+//         let d = $tempMaxDay + number[i, 0];
+//         day.push(a, b, c, d)
+//         for (let i = 0; i < day.length; i++) {
+//             console.log(day[i]);
+//             dayOneLink.innerHTML = '<div>' + day[i, 0] + '</div><img src="' + day[i, 1] + '"></img><div>' + day[i, 2] + '°C / ' + day[i, 3] + '°C</div>';
+//         }
+//     }
+// }
 
 
 function setInfos() {
@@ -98,7 +98,7 @@ function setInfos() {
     tempMinMax.innerHTML = `${$tempMaxDayOne}°C / ${$tempMinDayOne}°C`;
     windSpd.innerHTML = `La vitesse du vent est de ${$windSpd}km/h`;
     windDir.innerHTML = `La direction du vent est ${$windDir}`;
-    putInfoIn();
+// putInfoIn();
     return;
 }
 
