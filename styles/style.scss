@@ -82,9 +82,10 @@ $marginTop: 5px;
         padding: 10px;
         display: inline-block;
         box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        & .link {
+        & [class^="link"] {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
         }
     }
@@ -105,3 +106,4 @@ $marginTop: 5px;
         }
     }
 }
+
