@@ -87,6 +87,21 @@ let $url;
 //     }
 // }
 
+function putInfoIn() {
+
+    let day = [
+        $shortDayOne,
+        $currentConditionIconDayOne,
+        $tempMinDayOne,
+        $tempMaxDayOne
+    ]
+    for (let i = 0; i < day.length; i++) {
+        console.log(day[i]);
+        dayOneLink.innerHTML = '<div>' + day[i, 0] + '</div><img src="' + day[i, 1] + '"></img><div>' + day[i, 2] + '°C / ' + day[i, 3] + '°C</div>';
+    }
+}
+
+
 
 function setInfos() {
     city.innerHTML = $cityName;
@@ -98,7 +113,7 @@ function setInfos() {
     tempMinMax.innerHTML = `${$tempMaxDayOne}°C / ${$tempMinDayOne}°C`;
     windSpd.innerHTML = `La vitesse du vent est de ${$windSpd}km/h`;
     windDir.innerHTML = `La direction du vent est ${$windDir}`;
-// putInfoIn();
+    putInfoIn();
     return;
 }
 
