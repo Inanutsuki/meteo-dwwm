@@ -64,6 +64,14 @@ a:hover {
   margin-top: 5px;
 }
 
+.temp-min {
+  color: blue;
+}
+
+.temp-max {
+  color: red;
+}
+
 .tabs {
   margin-top: 5px;
 }

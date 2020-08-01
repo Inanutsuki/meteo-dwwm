@@ -30,6 +30,7 @@ let $myCity;
 let $day = [];
 let $forecastData = [];
 
+
 function actionFetch() {
     fetch($url)
         .then(function (response) {
@@ -73,7 +74,7 @@ function setInfos() {
     temperature.innerHTML = `Il fait ${$temperature}°C`;
     hour.innerHTML = `Prévision pour ${$hour}h`;
     humidity.innerHTML = `Il y a ${$humidity}% d'humidité`;
-    tempMinMax.innerHTML = `${$forecastData[0].tempMaxDay}°C / ${$forecastData[0].tempMinDay}°C`;
+    tempMinMax.innerHTML = `<div class="temp-max">${$forecastData[0].tempMaxDay}°C</div><div class="temp-min">${$forecastData[0].tempMinDay}°C</div>`;
     windSpd.innerHTML = `La vitesse du vent est de ${$windSpd}km/h`;
     windDir.innerHTML = `La direction du vent est ${$windDir}`;
 
@@ -89,8 +90,9 @@ function putInfoIn() {
         $day.push(dayNumb);
         for (let i = 0; i < $day.length; ++i) {
             $day[i].day.innerHTML = `<div>${$forecastData[i].shortDay}</div>
-                                <img src="${$forecastData[i].currentConditionIconDay}"></img>
-                                <div>${$forecastData[i].tempMaxDay}°C / ${$forecastData[i].tempMinDay}°C</div>`;
+                                    <img src="${$forecastData[i].currentConditionIconDay}"></img>
+                                    <div class="temp-max">${$forecastData[i].tempMaxDay}°C</div><div class="temp-min">${$forecastData[i].tempMinDay}°C</div>
+                                    `;
         }
     }
 }
