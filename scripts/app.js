@@ -20,38 +20,51 @@ let $humidity;
 let $windDir;
 let $windSpd;
 
+let $city;
+let $url;
+let $posLat;
+let $posLong;
+let $urlApi;
+let $myCity;
+
 let $day = [];
 let $forecastData = [];
 
+function actionFetch() {
+    fetch($url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            console.log(response)
 
-let $city;
-let $url;
+            $cityName = response.city_info.name;
+            $currentCondition = response.current_condition.condition;
+            $currentConditionIcon = response.current_condition.icon_big;
+            $hour = response.current_condition.hour;
+            $humidity = response.current_condition.humidity;
+            $windDir = response.current_condition.wnd_dir;
+            $windSpd = response.current_condition.wnd_spd;
+            $temperature = response.current_condition.tmp;
+            $date = response.current_condition.date;
+            for (let i = 0; i < 5; ++i) {
+                const dayData = {
+                    shortDay: response["fcst_day_" + i].day_short,
+                    currentConditionIconDay: response["fcst_day_" + i].icon,
+                    tempMinDay: response["fcst_day_" + i].tmin,
+                    tempMaxDay: response["fcst_day_" + i].tmax
+                }
+                $forecastData.push(dayData);
+            }
 
-function putInfoIn() {
-    for (let i = 1; i <= 5; ++i) {
-        const dayNumb = {
-            day: document.querySelector('.link' + i)
-        }
-        $day.push(dayNumb);
-        for (let i = 0; i < $day.length; ++i) {
-            $day[i].day.innerHTML = `<div>${$forecastData[i].shortDay}</div>
-                                <img src="${$forecastData[i].currentConditionIconDay}"></img>
-                                <div>${$forecastData[i].tempMaxDay}°C / ${$forecastData[i].tempMinDay}°C</div>`;
-        }
-    }
+            setInfos();
+        })
+        .catch(function (error) {
+            alert("Cette ville n'éxiste pas ou n'est pas répertoriée." + error);
+            localStorage.clear();
+            console.log("Erreur : " + error);
+        })
 }
-
-
-if ("geolocation" in navigator) {
-    
-    console.log('ok');
-  } else {
-    console.log('pas ok');
-  }
-  navigator.geolocation.getCurrentPosition(function(position) {
-    posLat = position.coords.latitude, posLong = position.coords.longitude;
-    console.log(posLat, posLong);
-  });
 
 function setInfos() {
     city.innerHTML = $cityName;
@@ -68,48 +81,52 @@ function setInfos() {
     return;
 }
 
-function actionFetch() {
-    fetch($url)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (response) {
+function putInfoIn() {
+    for (let i = 1; i <= 5; ++i) {
+        const dayNumb = {
+            day: document.querySelector('.link' + i)
+        }
+        $day.push(dayNumb);
+        for (let i = 0; i < $day.length; ++i) {
+            $day[i].day.innerHTML = `<div>${$forecastData[i].shortDay}</div>
+                                <img src="${$forecastData[i].currentConditionIconDay}"></img>
+                                <div>${$forecastData[i].tempMaxDay}°C / ${$forecastData[i].tempMinDay}°C</div>`;
+        }
+    }
+}
 
-            console.log(response)
+function getPos() {
+    if ("geolocation" in navigator) {
+        console.log('Géolocalisation activée');
 
-            $cityName = response.city_info.name;
-            $currentCondition = response.current_condition.condition;
-            $currentConditionIcon = response.current_condition.icon_big;
-            $hour = response.current_condition.hour;
-            $humidity = response.current_condition.humidity;
-            $windDir = response.current_condition.wnd_dir;
-            $windSpd = response.current_condition.wnd_spd;
-            $temperature = response.current_condition.tmp;
-            $date = response.current_condition.date;
+        navigator.geolocation.getCurrentPosition(function (position) {
+            $posLat = position.coords.latitude, $posLong = position.coords.longitude;
+            $urlApi = `https://geo.api.gouv.fr/communes?lat=${$posLat}&lon=${$posLong}&fields=code&format=json&geometry=centre`;
 
-            for (let i = 0; i < 5; ++i) {
-                const dayData = {
-                    shortDay: response["fcst_day_" + i].day_short,
-                    currentConditionIconDay: response["fcst_day_" + i].icon,
-                    tempMinDay: response["fcst_day_" + i].tmin,
-                    tempMaxDay: response["fcst_day_" + i].tmax
-                }
-                $forecastData.push(dayData);
-            }
+            fetch($urlApi)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (response) {
+                    console.log(response)
+                    $myCity = response[0].nom;
+                    $url = `https://www.prevision-meteo.ch/services/json/` + $myCity;
+                    actionFetch()
 
-            setInfos();
+                    console.log($myCity);
+                })
+                .catch(function (error) {
+                    console.log("Erreur api: " + error);
+                })
+        });
 
-        })
-        .catch(function (error) {
-            alert("Cette ville n'éxiste pas ou n'est pas répertoriée." + error);
-            localStorage.clear();
-            console.log("Erreur : " + error);
-        })
+    } else {
+        console.log("La géolocalisation n'est pas activée");
+    }
 }
 
 function getCity() {
     let cityLocalStorage = localStorage.getItem('$city');
-
     if (cityLocalStorage == '' || cityLocalStorage == null) {
         $city = 'toulon';
         localStorage.setItem('$city', $city);
@@ -117,16 +134,18 @@ function getCity() {
         $city = cityLocalStorage;
     }
     $url = `https://www.prevision-meteo.ch/services/json/` + $city;
+
     actionFetch();
 }
 
 function getInputCity(event) {
-    event.preventDefault();
     $city = inputCity.value;
     localStorage.setItem('$city', $city);
     $url = `https://www.prevision-meteo.ch/services/json/` + $city;
     actionFetch();
 }
+
+getPos();
 
 getCity();
 
@@ -137,27 +156,35 @@ form.addEventListener('submit', function (event) {
     getInputCity();
 })
 
-/*onglets*/
+
+
+/*onglets a mettre dans un nouveau script*/
 
 const tabs = document.querySelectorAll('.tabs a');
 let li;
-function setClassActive(link) {
-    let tabsWrapper = link.parentNode.parentNode.parentNode;
-    li = link.parentNode;
-    if (li.classList.contains('active')) {
-        return false;
+
+function tabsNav(){
+    function setClassActive(link) {
+        let tabsWrapper = link.parentNode.parentNode.parentNode;
+        li = link.parentNode;
+        if (li.classList.contains('active')) {
+
+            return false;
+        }
+        tabsWrapper.querySelector('.tabs .active').classList.remove('active');
+        li.classList.add('active');
+
+        tabsWrapper.querySelector('.tab-content.active').classList.remove('active');
+        tabsWrapper.querySelector(link.getAttribute('href')).classList.add('active');
     }
-    tabsWrapper.querySelector('.tabs .active').classList.remove('active');
-    li.classList.add('active');
-
-    tabsWrapper.querySelector('.tab-content.active').classList.remove('active');
-    tabsWrapper.querySelector(link.getAttribute('href')).classList.add('active');
+    for (let i = 0; i < tabs.length; ++i) {
+        tabs[i].addEventListener('mouseover', function (event) {
+            setClassActive(this);
+        })
+    }
 }
 
-for (let i = 0; i < tabs.length; ++i) {
-    tabs[i].addEventListener('mouseover', function (event) {
-        setClassActive(this);
-    })
-}
+tabsNav();
+
 
 /*End onglets*/
