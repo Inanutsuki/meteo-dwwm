@@ -121,7 +121,6 @@ function getPos() {
                     console.log("Erreur api: " + error);
                 })
         });
-
     } else {
         console.log("La géolocalisation n'est pas activée");
     }
@@ -140,7 +139,7 @@ function getCity() {
     actionFetch();
 }
 
-function getInputCity(event) {
+function getInputCity() {
     $city = inputCity.value;
     localStorage.setItem('$city', $city);
     $url = `https://www.prevision-meteo.ch/services/json/` + $city;
@@ -165,7 +164,7 @@ form.addEventListener('submit', function (event) {
 const tabs = document.querySelectorAll('.tabs a');
 let li;
 
-function tabsNav(){
+function tabsNav() {
     function setClassActive(link) {
         let tabsWrapper = link.parentNode.parentNode.parentNode;
         li = link.parentNode;
@@ -187,6 +186,5 @@ function tabsNav(){
 }
 
 tabsNav();
-
 
 /*End onglets*/
