@@ -171,7 +171,11 @@ getCity();
 
 getPos();
 
-geolocBtn.addEventListener('click', getPos);
+geolocBtn.addEventListener('click', function(event){
+    event.preventDefault()
+    addNew();
+    getPos();
+});
 
 inputCity.addEventListener('change', function (event) {
     event.preventDefault();
