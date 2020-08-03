@@ -33,6 +33,7 @@ let $myCity;
 let $day = [];
 let $forecastData = [];
 let $hourlyData = [];
+let $fcstDayHourlyData = [];
 
 
 function actionFetch() {
@@ -41,7 +42,7 @@ function actionFetch() {
             return response.json();
         })
         .then(function (response) {
-            console.log(response)
+            console.log(response);
             $cityName = response.city_info.name;
             $currentCondition = response.current_condition.condition;
             $currentConditionIcon = response.current_condition.icon_big;
@@ -52,8 +53,17 @@ function actionFetch() {
             $temperature = response.current_condition.tmp;
             $date = response.current_condition.date;
             $conditionByHour = response.fcst_day_0.hourly_data;
+            for (i = 0; i < 24; ++i) {
+                const hourData = {
+                    hourByHourDataHour: i + 'h00',
+                    hourByHourDataIcon: $conditionByHour[i + 'H00'].ICON,
+                    hourByHourDataTemp: $conditionByHour[i + 'H00'].TMP2m
+                }
+                $hourlyData.push(hourData);
+            }
             for (let i = 0; i < 5; ++i) {
                 const dayData = {
+                    fcstDay: "fcst_day_" + i,
                     shortDay: response["fcst_day_" + i].day_short,
                     currentConditionIconDay: response["fcst_day_" + i].icon,
                     tempMinDay: response["fcst_day_" + i].tmin,
@@ -61,11 +71,19 @@ function actionFetch() {
                 }
                 $forecastData.push(dayData);
             }
-            for (i = 0; i < 24; ++i) {
-                const hourData = {
-                    hourByHourData: $conditionByHour[i + 'H00'].ICON
+            for (let i = 0; i < 5; ++i) {
+                let rspData = response["fcst_day_" + i].hourly_data;
+                const fcstDayHourlyData = {
+                    fcstDayData0: { icon: rspData[0 + 'H00'].ICON, temp: rspData[0 + 'H00'].TMP2m, windSpd: rspData[0 + 'H00'].WNDSPD10m, windDir: rspData[0 + 'H00'].WNDDIRCARD10, humidity: rspData[0 + 'H00'].HUMIDEX },
+                    fcstDayData1: { icon: rspData[3 + 'H00'].ICON, temp: rspData[3 + 'H00'].TMP2m, windSpd: rspData[3 + 'H00'].WNDSPD10m, windDir: rspData[3 + 'H00'].WNDDIRCARD10, humidity: rspData[3 + 'H00'].HUMIDEX },
+                    fcstDayData2: { icon: rspData[6 + 'H00'].ICON, temp: rspData[6 + 'H00'].TMP2m, windSpd: rspData[6 + 'H00'].WNDSPD10m, windDir: rspData[6 + 'H00'].WNDDIRCARD10, humidity: rspData[6 + 'H00'].HUMIDEX },
+                    fcstDayData3: { icon: rspData[9 + 'H00'].ICON, temp: rspData[9 + 'H00'].TMP2m, windSpd: rspData[9 + 'H00'].WNDSPD10m, windDir: rspData[9 + 'H00'].WNDDIRCARD10, humidity: rspData[9 + 'H00'].HUMIDEX },
+                    fcstDayData4: { icon: rspData[12 + 'H00'].ICON, temp: rspData[12 + 'H00'].TMP2m, windSpd: rspData[12 + 'H00'].WNDSPD10m, windDir: rspData[12 + 'H00'].WNDDIRCARD10, humidity: rspData[12 + 'H00'].HUMIDEX },
+                    fcstDayData5: { icon: rspData[15 + 'H00'].ICON, temp: rspData[15 + 'H00'].TMP2m, windSpd: rspData[15 + 'H00'].WNDSPD10m, windDir: rspData[15 + 'H00'].WNDDIRCARD10, humidity: rspData[15 + 'H00'].HUMIDEX },
+                    fcstDayData6: { icon: rspData[18 + 'H00'].ICON, temp: rspData[18 + 'H00'].TMP2m, windSpd: rspData[18 + 'H00'].WNDSPD10m, windDir: rspData[18 + 'H00'].WNDDIRCARD10, humidity: rspData[18 + 'H00'].HUMIDEX },
+                    fcstDayData7: { icon: rspData[21 + 'H00'].ICON, temp: rspData[21 + 'H00'].TMP2m, windSpd: rspData[21 + 'H00'].WNDSPD10m, windDir: rspData[21 + 'H00'].WNDDIRCARD10, humidity: rspData[21 + 'H00'].HUMIDEX }
                 }
-                $hourlyData.push(hourData);
+                $fcstDayHourlyData.push(fcstDayHourlyData);
             }
             setInfos();
         })
@@ -79,19 +97,36 @@ function actionFetch() {
 function putInfoIn() {
     for (let i = 1; i <= 5; ++i) {
         const dayNumb = {
-            day: document.querySelector('.link' + i)
+            day: document.querySelector('.link' + i),
+            content: document.querySelector('.content' + i)
         }
         $day.push(dayNumb);
         for (let i = 0; i < $day.length; ++i) {
-            $day[i].day.innerHTML = `<div>${$forecastData[i].shortDay}</div>
+            $day[i].day.innerHTML = `
+                                    <div>${$forecastData[i].shortDay}</div>
                                     <img src="${$forecastData[i].currentConditionIconDay}"></img>
                                     <div class="temp-max">${$forecastData[i].tempMaxDay}°C</div><div class="temp-min">${$forecastData[i].tempMinDay}°C</div>
                                     `;
+            for (let idx = 0; idx < $fcstDayHourlyData.length; ++idx) {
+                $day[i].content.innerHTML = `
+                                    <div class="forecast-content"><div>Prévision pour</div><div class="forecast-img">Météo</div></img><div>Température (°C)</div><div>Vitesse du vent (km/h)</div><div>Direction du vent</div></div>
+                                    <div class="forecast-content"><div>0h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 0].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].windDir}</div></div>
+                                    <div class="forecast-content"><div>3h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 1].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].windDir}</div></div>
+                                    <div class="forecast-content"><div>5h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 2].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].windDir}</div></div>
+                                    <div class="forecast-content"><div>9h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 3].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].windDir}</div></div>
+                                    <div class="forecast-content"><div>12h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 4].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].windDir}</div></div>
+                                    <div class="forecast-content"><div>15h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 5].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].windDir}</div></div>
+                                    <div class="forecast-content"><div>18h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 6].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].windDir}</div></div>
+                                    <div class="forecast-content"><div>21h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 7].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].windDir}</div></div>
+                                    `;
+            }
         }
+
     }
     for (let i = 0; i < $hourlyData.length; ++i) {
-        hourByHour.innerHTML += `<img class"child" src=${$hourlyData[i].hourByHourData}></img>`;
+        hourByHour.innerHTML += `<div class="hour-by-hour_col"><div class="hour-by-hour_hour">${$hourlyData[i].hourByHourDataHour}</div><img class="hour-by-hour_img" src=${$hourlyData[i].hourByHourDataIcon}></img><div class="hour-by-hour_temp">${$hourlyData[i].hourByHourDataTemp}°C</div></div>`;
     }
+
 }
 
 function setInfos() {
@@ -118,10 +153,10 @@ function successGetPos(position) {
         })
         .then(function (response) {
             console.log(response);
-            addNew();
             $myCity = response[0].nom;
             $url = `https://www.prevision-meteo.ch/services/json/` + $myCity;
-            actionFetch()
+            addNew();
+            actionFetch();
         })
         .catch(function (error) {
             console.log("Erreur api: " + error);
@@ -138,23 +173,10 @@ function errorGetPos(err) {
 function getPos() {
     if ("geolocation" in navigator) {
         console.log('Géolocalisation activée');
-        
-
-        navigator.geolocation.getCurrentPosition(successGetPos, errorGetPos)
+        navigator.geolocation.getCurrentPosition(successGetPos, errorGetPos);
     } else {
         console.log("La géolocalisation n'est pas activée");
     }
-}
-
-function getCity() {
-    let cityLocalStorage = localStorage.getItem('$city');
-    if (cityLocalStorage == '' || cityLocalStorage == null) {
-        $city = 'toulon';
-        localStorage.setItem('$city', $city);
-    } else if (cityLocalStorage !== '' || cityLocalStorage !== null) {
-        $city = cityLocalStorage;
-    }
-    $url = `https://www.prevision-meteo.ch/services/json/` + $city;
 }
 
 function addNew() {
@@ -162,17 +184,15 @@ function addNew() {
     hourByHourConainer.removeChild(child);
     let parent = document.createElement('div');
     parent.className = 'hour-by-hour';
-    hourByHourConainer.appendChild(parent)
+    hourByHourConainer.appendChild(parent);
     hourByHour = document.querySelector('.hour-by-hour');
     $hourlyData = [];
 }
 
-getCity();
-
 getPos();
 
-geolocBtn.addEventListener('click', function(event){
-    event.preventDefault()
+geolocBtn.addEventListener('click', function (event) {
+    event.preventDefault();
     addNew();
     getPos();
 });
@@ -200,12 +220,10 @@ function tabsNav() {
         let tabsWrapper = link.parentNode.parentNode.parentNode;
         li = link.parentNode;
         if (li.classList.contains('active')) {
-
             return false;
         }
         tabsWrapper.querySelector('.tabs .active').classList.remove('active');
         li.classList.add('active');
-
         tabsWrapper.querySelector('.tab-content.active').classList.remove('active');
         tabsWrapper.querySelector(link.getAttribute('href')).classList.add('active');
     }

@@ -61,6 +61,7 @@ $marginTop: 5px;
     &min {
         color: blue;
     }
+
     &max {
         color: red;
     }
@@ -81,6 +82,22 @@ $marginTop: 5px;
         padding: 20px;
         background-color: #fff;
         box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+
+        & > div {
+            width: max-content;
+        }
+
+        & .forecast {
+            &-content {
+                display: inline-block;
+            }
+
+            &-img {
+                height: 45px;
+                display: flex;
+                align-items: center;
+            }
+        }
     }
 
     & li {
@@ -108,12 +125,45 @@ $marginTop: 5px;
     }
 }
 
+.hour-by-hour {
+    overflow: scroll;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-y: hidden;
+    padding: 5px;
+
+    &_col {
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-left: solid black 1px;
+
+        &:first-child {
+            border-left: none;
+        }
+    }
+
+    &_img {
+        width: 40px;
+        height: auto;
+    }
+
+    &_temp, &_hour {
+        font-size: 15px;
+    }
+}
+
 .tab {
     &-content {
         display: none;
 
         &.active {
-            display: block;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow: scroll;
+            overflow-y: hidden;
         }
     }
 }
