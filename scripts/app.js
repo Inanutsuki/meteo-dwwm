@@ -117,7 +117,8 @@ function successGetPos(position) {
             return response.json();
         })
         .then(function (response) {
-            console.log(response)
+            console.log(response);
+            addNew();
             $myCity = response[0].nom;
             $url = `https://www.prevision-meteo.ch/services/json/` + $myCity;
             actionFetch()
@@ -137,7 +138,7 @@ function errorGetPos(err) {
 function getPos() {
     if ("geolocation" in navigator) {
         console.log('Géolocalisation activée');
-        addNew();
+        
 
         navigator.geolocation.getCurrentPosition(successGetPos, errorGetPos)
     } else {
