@@ -57,12 +57,13 @@ $marginTop: 5px;
     }
 }
 
-.temp-min {
-    color: blue;
-}
-
-.temp-max {
-    color: red;
+.temp- {
+    &min {
+        color: blue;
+    }
+    &max {
+        color: red;
+    }
 }
 
 .tabs {

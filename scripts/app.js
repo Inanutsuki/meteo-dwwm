@@ -9,9 +9,9 @@ const humidity = document.querySelector('.humidity');
 const tempMinMax = document.querySelector('.temp_min-max');
 const windSpd = document.querySelector('.wind_spd');
 const windDir = document.querySelector('.wind_dir');
-let hourByHour = document.querySelector('.hour-by-hour');
 const hourByHourConainer = document.querySelector('.hour-by-hour-container');
 const geolocBtn = document.querySelector('.geoloc');
+let hourByHour = document.querySelector('.hour-by-hour');
 
 let $cityName;
 let $currentCondition;
@@ -61,21 +61,13 @@ function actionFetch() {
                 }
                 $forecastData.push(dayData);
             }
-
-
-
             for (i = 0; i < 24; ++i) {
                 const hourData = {
                     hourByHourData: $conditionByHour[i + 'H00'].ICON
                 }
                 $hourlyData.push(hourData);
-                
             }
-
             setInfos();
-
-
-
         })
         .catch(function (error) {
             alert("Cette ville n'éxiste pas ou n'est pas répertoriée." + error);
@@ -83,8 +75,6 @@ function actionFetch() {
             console.log("Erreur : " + error);
         })
 }
-
-
 
 function putInfoIn() {
     for (let i = 1; i <= 5; ++i) {
@@ -99,13 +89,9 @@ function putInfoIn() {
                                     `;
         }
     }
-
     for (let i = 0; i < $hourlyData.length; ++i) {
         hourByHour.innerHTML += `<img class"child" src=${$hourlyData[i].hourByHourData}></img>`;
     }
-
-
-
 }
 
 function setInfos() {
@@ -119,54 +105,58 @@ function setInfos() {
     windSpd.innerHTML = `La vitesse du vent est de ${$windSpd}km/h`;
     windDir.innerHTML = `La direction du vent est ${$windDir}`;
     putInfoIn();
-    
     return;
+}
+
+function successGetPos(position) {
+    $posLat = position.coords.latitude, $posLong = position.coords.longitude;
+    $urlApi = `https://geo.api.gouv.fr/communes?lat=${$posLat}&lon=${$posLong}&fields=code&format=json&geometry=centre`;
+
+    fetch($urlApi)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            console.log(response)
+            $myCity = response[0].nom;
+            $url = `https://www.prevision-meteo.ch/services/json/` + $myCity;
+            actionFetch()
+        })
+        .catch(function (error) {
+            console.log("Erreur api: " + error);
+        })
+}
+
+function errorGetPos(err) {
+    console.warn(`ERREUR (${err.code}): ${err.message}`);
+    $city = 'toulon';
+    $url = `https://www.prevision-meteo.ch/services/json/` + $city;
+    actionFetch();
 }
 
 function getPos() {
     if ("geolocation" in navigator) {
         console.log('Géolocalisation activée');
+        addNew();
 
-        navigator.geolocation.getCurrentPosition(function (position) {
-            $posLat = position.coords.latitude, $posLong = position.coords.longitude;
-            $urlApi = `https://geo.api.gouv.fr/communes?lat=${$posLat}&lon=${$posLong}&fields=code&format=json&geometry=centre`;
-
-            fetch($urlApi)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (response) {
-                    console.log(response)
-                    $myCity = response[0].nom;
-                    $url = `https://www.prevision-meteo.ch/services/json/` + $myCity;
-                    actionFetch()
-                    console.log($myCity);
-                })
-                .catch(function (error) {
-                    console.log("Erreur api: " + error);
-                })
-        });
+        navigator.geolocation.getCurrentPosition(successGetPos, errorGetPos)
     } else {
         console.log("La géolocalisation n'est pas activée");
     }
 }
 
-// function getCity() {
-//     let cityLocalStorage = localStorage.getItem('$city');
-//     if (cityLocalStorage == '' || cityLocalStorage == null) {
-//         $city = 'toulon';
-//         localStorage.setItem('$city', $city);
-//     } else if (cityLocalStorage !== '' || cityLocalStorage !== null) {
-//         $city = cityLocalStorage;
-//     }
-//     $url = `https://www.prevision-meteo.ch/services/json/` + $city;
-// }
-
-function getInputCity(event) {
-
+function getCity() {
+    let cityLocalStorage = localStorage.getItem('$city');
+    if (cityLocalStorage == '' || cityLocalStorage == null) {
+        $city = 'toulon';
+        localStorage.setItem('$city', $city);
+    } else if (cityLocalStorage !== '' || cityLocalStorage !== null) {
+        $city = cityLocalStorage;
+    }
+    $url = `https://www.prevision-meteo.ch/services/json/` + $city;
 }
 
-function addNew(){
+function addNew() {
     let child = hourByHourConainer.firstElementChild;
     hourByHourConainer.removeChild(child);
     let parent = document.createElement('div');
@@ -176,9 +166,10 @@ function addNew(){
     $hourlyData = [];
 }
 
+getCity();
 
-// getCity();
 getPos();
+
 geolocBtn.addEventListener('click', getPos);
 
 inputCity.addEventListener('change', function (event) {
@@ -192,10 +183,7 @@ inputCity.addEventListener('change', function (event) {
 
 form.addEventListener('submit', function (event) {
     event.preventDefault();
-    getInputCity();
 })
-
-
 
 /*onglets a mettre dans un nouveau script*/
 
@@ -232,12 +220,5 @@ function hourNow() {
     var date = new Date();
     var hour = date.getHours();
     return hour;
-
 };
-
-
-
-
-
-
 /**End heure par heure**/
