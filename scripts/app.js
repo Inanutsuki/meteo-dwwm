@@ -9,6 +9,9 @@ const humidity = document.querySelector('.humidity');
 const tempMinMax = document.querySelector('.temp_min-max');
 const windSpd = document.querySelector('.wind_spd');
 const windDir = document.querySelector('.wind_dir');
+let hourByHour = document.querySelector('.hour-by-hour');
+const hourByHourConainer = document.querySelector('.hour-by-hour-container');
+const geolocBtn = document.querySelector('.geoloc');
 
 let $cityName;
 let $currentCondition;
@@ -29,6 +32,7 @@ let $myCity;
 
 let $day = [];
 let $forecastData = [];
+let $hourlyData = [];
 
 
 function actionFetch() {
@@ -38,7 +42,6 @@ function actionFetch() {
         })
         .then(function (response) {
             console.log(response)
-
             $cityName = response.city_info.name;
             $currentCondition = response.current_condition.condition;
             $currentConditionIcon = response.current_condition.icon_big;
@@ -48,6 +51,7 @@ function actionFetch() {
             $windSpd = response.current_condition.wnd_spd;
             $temperature = response.current_condition.tmp;
             $date = response.current_condition.date;
+            $conditionByHour = response.fcst_day_0.hourly_data;
             for (let i = 0; i < 5; ++i) {
                 const dayData = {
                     shortDay: response["fcst_day_" + i].day_short,
@@ -58,7 +62,20 @@ function actionFetch() {
                 $forecastData.push(dayData);
             }
 
+
+
+            for (i = 0; i < 24; ++i) {
+                const hourData = {
+                    hourByHourData: $conditionByHour[i + 'H00'].ICON
+                }
+                $hourlyData.push(hourData);
+                
+            }
+
             setInfos();
+
+
+
         })
         .catch(function (error) {
             alert("Cette ville n'éxiste pas ou n'est pas répertoriée." + error);
@@ -67,20 +84,7 @@ function actionFetch() {
         })
 }
 
-function setInfos() {
-    city.innerHTML = $cityName;
-    currentCondition.innerHTML = $currentCondition;
-    currentConditionIcon.innerHTML = `<img src=${$currentConditionIcon}>`;
-    temperature.innerHTML = `Il fait ${$temperature}°C`;
-    hour.innerHTML = `Prévision pour ${$hour}h`;
-    humidity.innerHTML = `Il y a ${$humidity}% d'humidité`;
-    tempMinMax.innerHTML = `<div class="temp-max">${$forecastData[0].tempMaxDay}°C</div><div class="temp-min">${$forecastData[0].tempMinDay}°C</div>`;
-    windSpd.innerHTML = `La vitesse du vent est de ${$windSpd}km/h`;
-    windDir.innerHTML = `La direction du vent est ${$windDir}`;
 
-    putInfoIn();
-    return;
-}
 
 function putInfoIn() {
     for (let i = 1; i <= 5; ++i) {
@@ -95,6 +99,28 @@ function putInfoIn() {
                                     `;
         }
     }
+
+    for (let i = 0; i < $hourlyData.length; ++i) {
+        hourByHour.innerHTML += `<img class"child" src=${$hourlyData[i].hourByHourData}></img>`;
+    }
+
+
+
+}
+
+function setInfos() {
+    city.innerHTML = $cityName;
+    currentCondition.innerHTML = $currentCondition;
+    currentConditionIcon.innerHTML = `<img src=${$currentConditionIcon}>`;
+    temperature.innerHTML = `Il fait ${$temperature}°C`;
+    hour.innerHTML = `Prévision pour ${$hour}h`;
+    humidity.innerHTML = `Il y a ${$humidity}% d'humidité`;
+    tempMinMax.innerHTML = `<div class="temp-max">${$forecastData[0].tempMaxDay}°C</div><div class="temp-min">${$forecastData[0].tempMinDay}°C</div>`;
+    windSpd.innerHTML = `La vitesse du vent est de ${$windSpd}km/h`;
+    windDir.innerHTML = `La direction du vent est ${$windDir}`;
+    putInfoIn();
+    
+    return;
 }
 
 function getPos() {
@@ -114,7 +140,6 @@ function getPos() {
                     $myCity = response[0].nom;
                     $url = `https://www.prevision-meteo.ch/services/json/` + $myCity;
                     actionFetch()
-
                     console.log($myCity);
                 })
                 .catch(function (error) {
@@ -126,31 +151,44 @@ function getPos() {
     }
 }
 
-function getCity() {
-    let cityLocalStorage = localStorage.getItem('$city');
-    if (cityLocalStorage == '' || cityLocalStorage == null) {
-        $city = 'toulon';
-        localStorage.setItem('$city', $city);
-    } else if (cityLocalStorage !== '' || cityLocalStorage !== null) {
-        $city = cityLocalStorage;
-    }
-    $url = `https://www.prevision-meteo.ch/services/json/` + $city;
+// function getCity() {
+//     let cityLocalStorage = localStorage.getItem('$city');
+//     if (cityLocalStorage == '' || cityLocalStorage == null) {
+//         $city = 'toulon';
+//         localStorage.setItem('$city', $city);
+//     } else if (cityLocalStorage !== '' || cityLocalStorage !== null) {
+//         $city = cityLocalStorage;
+//     }
+//     $url = `https://www.prevision-meteo.ch/services/json/` + $city;
+// }
 
-    actionFetch();
+function getInputCity(event) {
+
 }
 
-function getInputCity() {
+function addNew(){
+    let child = hourByHourConainer.firstElementChild;
+    hourByHourConainer.removeChild(child);
+    let parent = document.createElement('div');
+    parent.className = 'hour-by-hour';
+    hourByHourConainer.appendChild(parent)
+    hourByHour = document.querySelector('.hour-by-hour');
+    $hourlyData = [];
+}
+
+
+// getCity();
+getPos();
+geolocBtn.addEventListener('click', getPos);
+
+inputCity.addEventListener('change', function (event) {
+    event.preventDefault();
     $city = inputCity.value;
     localStorage.setItem('$city', $city);
     $url = `https://www.prevision-meteo.ch/services/json/` + $city;
+    addNew()
     actionFetch();
-}
-
-getPos();
-
-getCity();
-
-inputCity.addEventListener('change', getInputCity);
+});
 
 form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -188,3 +226,18 @@ function tabsNav() {
 tabsNav();
 
 /*End onglets*/
+
+/**Heure par heure**/
+function hourNow() {
+    var date = new Date();
+    var hour = date.getHours();
+    return hour;
+
+};
+
+
+
+
+
+
+/**End heure par heure**/
