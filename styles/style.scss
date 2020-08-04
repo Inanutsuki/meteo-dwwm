@@ -1,4 +1,17 @@
 /*Reset CSS*/
+html, body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5em;
+    font-size: 1em;
+}
+body {
+    width: 100%;
+}
+h2 {
+    font-size: 1.5rem;
+    text-align: center;
+}
 ul, li {
     padding: 0;
     margin: 0;
@@ -26,17 +39,13 @@ $marginTop: 5px;
     font-family: 'Roboto', Helvetica, sans-serif;
     color: #444;
     max-width: 900px;
-    min-width: 300px;
+    min-width: 768px;
     margin: auto;
 
     & .page {
         display: flex;
         justify-content: space-around;
         align-items: center;
-    }
-
-    & .city {
-        text-align: center;
     }
 
     & .left {
@@ -68,7 +77,13 @@ $marginTop: 5px;
 }
 
 .tabs {
-    margin-top: $marginTop;
+    &-wrapper {
+        margin-top: $marginTop;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
     &:after {
         display: table;
@@ -77,6 +92,7 @@ $marginTop: 5px;
     }
 
     &-content {
+        width: max-content;
         z-index: 3;
         position: relative;
         padding: 20px;
@@ -90,6 +106,10 @@ $marginTop: 5px;
         & .forecast {
             &-content {
                 display: inline-block;
+                margin-left: 15px;
+                &:first-child {
+                    margin-left: 0;
+                }
             }
 
             &-img {
@@ -115,6 +135,13 @@ $marginTop: 5px;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            & .temp-min-max {
+                display: flex;
+                justify-content: space-between;
+                & .temp-min {
+                    margin-left: 5px;
+                }
+            }
         }
     }
 
@@ -162,8 +189,6 @@ $marginTop: 5px;
         &.active {
             display: flex;
             flex-wrap: nowrap;
-            overflow: scroll;
-            overflow-y: hidden;
         }
     }
 }

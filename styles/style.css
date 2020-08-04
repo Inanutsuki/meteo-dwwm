@@ -1,4 +1,20 @@
 /*Reset CSS*/
+html, body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5em;
+  font-size: 1em;
+}
+
+body {
+  width: 100%;
+}
+
+h2 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 ul, li {
   padding: 0;
   margin: 0;
@@ -22,7 +38,7 @@ a:hover {
   font-family: 'Roboto', Helvetica, sans-serif;
   color: #444;
   max-width: 900px;
-  min-width: 300px;
+  min-width: 768px;
   margin: auto;
 }
 
@@ -35,10 +51,6 @@ a:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.wrapper .city {
-  text-align: center;
 }
 
 .wrapper .left li {
@@ -72,8 +84,21 @@ a:hover {
   color: red;
 }
 
-.tabs {
+.tabs-wrapper {
   margin-top: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .tabs:after {
@@ -83,6 +108,9 @@ a:hover {
 }
 
 .tabs-content {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   z-index: 3;
   position: relative;
   padding: 20px;
@@ -99,6 +127,11 @@ a:hover {
 
 .tabs-content .forecast-content {
   display: inline-block;
+  margin-left: 15px;
+}
+
+.tabs-content .forecast-content:first-child {
+  margin-left: 0;
 }
 
 .tabs-content .forecast-img {
@@ -137,6 +170,19 @@ a:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.tabs a [class^="link"] .temp-min-max {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.tabs a [class^="link"] .temp-min-max .temp-min {
+  margin-left: 5px;
 }
 
 .tabs .active a {
@@ -195,7 +241,5 @@ a:hover {
   display: flex;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  overflow: scroll;
-  overflow-y: hidden;
 }
 /*# sourceMappingURL=style.css.map */

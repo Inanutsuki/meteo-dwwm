@@ -1,4 +1,4 @@
-const city = document.querySelector('.city');
+const city = document.querySelector('.city-title');
 const currentCondition = document.querySelector('.current_condition');
 const temperature = document.querySelector('.temperature');
 const currentConditionIcon = document.querySelector('.current_condition_icon');
@@ -22,7 +22,6 @@ let $hour;
 let $humidity;
 let $windDir;
 let $windSpd;
-
 let $city;
 let $url;
 let $posLat;
@@ -36,22 +35,27 @@ let $hourlyData = [];
 let $fcstDayHourlyData = [];
 
 
+
+
+
 function actionFetch() {
     fetch($url)
         .then(function (response) {
             return response.json();
         })
         .then(function (response) {
+            let respCondition = response.current_condition;
             console.log(response);
+            
+            $currentCondition = respCondition.condition;
+            $currentConditionIcon = respCondition.icon_big;
+            $hour = respCondition.hour;
+            $humidity = respCondition.humidity;
+            $windDir = respCondition.wnd_dir;
+            $windSpd = respCondition.wnd_spd;
+            $temperature = respCondition.tmp;
+            $date = respCondition.date;
             $cityName = response.city_info.name;
-            $currentCondition = response.current_condition.condition;
-            $currentConditionIcon = response.current_condition.icon_big;
-            $hour = response.current_condition.hour;
-            $humidity = response.current_condition.humidity;
-            $windDir = response.current_condition.wnd_dir;
-            $windSpd = response.current_condition.wnd_spd;
-            $temperature = response.current_condition.tmp;
-            $date = response.current_condition.date;
             $conditionByHour = response.fcst_day_0.hourly_data;
             for (i = 0; i < 24; ++i) {
                 const hourData = {
@@ -89,8 +93,6 @@ function actionFetch() {
         })
         .catch(function (error) {
             alert("Cette ville n'éxiste pas ou n'est pas répertoriée." + error);
-            localStorage.clear();
-            console.log("Erreur : " + error);
         })
 }
 
@@ -105,28 +107,26 @@ function putInfoIn() {
             $day[i].day.innerHTML = `
                                     <div>${$forecastData[i].shortDay}</div>
                                     <img src="${$forecastData[i].currentConditionIconDay}"></img>
-                                    <div class="temp-max">${$forecastData[i].tempMaxDay}°C</div><div class="temp-min">${$forecastData[i].tempMinDay}°C</div>
+                                    <div class="temp-min-max"><div class="temp-max">${$forecastData[i].tempMaxDay}°C</div><div class="temp-min">${$forecastData[i].tempMinDay}°C</div></div>
                                     `;
             for (let idx = 0; idx < $fcstDayHourlyData.length; ++idx) {
                 $day[i].content.innerHTML = `
-                                    <div class="forecast-content"><div>Prévision pour</div><div class="forecast-img">Météo</div></img><div>Température (°C)</div><div>Vitesse du vent (km/h)</div><div>Direction du vent</div></div>
-                                    <div class="forecast-content"><div>0h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 0].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].windDir}</div></div>
-                                    <div class="forecast-content"><div>3h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 1].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].windDir}</div></div>
-                                    <div class="forecast-content"><div>5h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 2].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].windDir}</div></div>
-                                    <div class="forecast-content"><div>9h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 3].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].windDir}</div></div>
-                                    <div class="forecast-content"><div>12h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 4].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].windDir}</div></div>
-                                    <div class="forecast-content"><div>15h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 5].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].windDir}</div></div>
-                                    <div class="forecast-content"><div>18h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 6].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].windDir}</div></div>
-                                    <div class="forecast-content"><div>21h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 7].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].windDir}</div></div>
-                                    `;
+                                            <div class="forecast-content"><div>Prévision pour</div><div class="forecast-img">Météo</div></img><div>Température (°C)</div><div>Vitesse du vent (km/h)</div><div>Direction du vent</div></div>
+                                            <div class="forecast-content"><div>0h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 0].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].windDir}</div></div>
+                                            <div class="forecast-content"><div>3h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 1].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].windDir}</div></div>
+                                            <div class="forecast-content"><div>5h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 2].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].windDir}</div></div>
+                                            <div class="forecast-content"><div>9h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 3].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].windDir}</div></div>
+                                            <div class="forecast-content"><div>12h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 4].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].windDir}</div></div>
+                                            <div class="forecast-content"><div>15h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 5].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].windDir}</div></div>
+                                            <div class="forecast-content"><div>18h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 6].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].windDir}</div></div>
+                                            <div class="forecast-content"><div>21h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i]['fcstDayData' + 7].icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].windDir}</div></div>
+                                            `;
             }
         }
-
     }
     for (let i = 0; i < $hourlyData.length; ++i) {
         hourByHour.innerHTML += `<div class="hour-by-hour_col"><div class="hour-by-hour_hour">${$hourlyData[i].hourByHourDataHour}</div><img class="hour-by-hour_img" src=${$hourlyData[i].hourByHourDataIcon}></img><div class="hour-by-hour_temp">${$hourlyData[i].hourByHourDataTemp}°C</div></div>`;
     }
-
 }
 
 function setInfos() {
@@ -139,6 +139,7 @@ function setInfos() {
     tempMinMax.innerHTML = `<div class="temp-max">${$forecastData[0].tempMaxDay}°C</div><div class="temp-min">${$forecastData[0].tempMinDay}°C</div>`;
     windSpd.innerHTML = `La vitesse du vent est de ${$windSpd}km/h`;
     windDir.innerHTML = `La direction du vent est ${$windDir}`;
+
     putInfoIn();
     return;
 }
@@ -210,7 +211,17 @@ form.addEventListener('submit', function (event) {
     event.preventDefault();
 })
 
-/*onglets a mettre dans un nouveau script*/
+/*scritpts a mettre dans un nouveau script*/
+
+/** Mediaquieries **/
+
+
+console.log(tabContentWidth)
+
+/** End mediaquieries **/
+
+
+/** Onglets **/
 
 const tabs = document.querySelectorAll('.tabs a');
 let li;
@@ -232,7 +243,14 @@ function tabsNav() {
             setClassActive(this);
         })
     }
+    
 }
+
+
+tabContent.addEventListener('mouseover', function() {
+    console.log(tabContentWidth);
+})
+
 
 tabsNav();
 
