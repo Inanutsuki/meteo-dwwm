@@ -246,12 +246,6 @@ function tabsNav() {
     
 }
 
-
-tabContent.addEventListener('mouseover', function() {
-    console.log(tabContentWidth);
-})
-
-
 tabsNav();
 
 /*End onglets*/
