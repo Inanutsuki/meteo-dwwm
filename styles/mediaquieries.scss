@@ -1,12 +1,10 @@
 @media screen and (max-width: 768px) {
     .wrapper {
         & .container {
-            margin: 15px;
             padding: 15px;
             width: unset;
 
             &-fluid {
-                margin: 15px;
                 padding: 15px;
                 width: unset;
             }
