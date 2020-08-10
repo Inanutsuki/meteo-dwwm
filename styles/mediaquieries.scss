@@ -1,14 +1,4 @@
 @media screen and (max-width: 576px) {
-    .search-form {
-        & .input_city {
-            padding: 0;
-        }
-
-        & .btn {
-            display: none;
-        }
-    }
-
     .wrapper {
         & .container {
             margin: 15px;
@@ -21,6 +11,21 @@
                 width: unset;
             }
         }
+        .navbar {
+            justify-content: space-around;
+            &-brand {
+                display: none;
+            }
+        }
+        & .search-form {
+            & .input_city {
+                padding: 0 5px;
+            }
+
+            & .btn {
+                display: none;
+            }
+        }
     }
 
     .row.page {
@@ -31,12 +36,14 @@
 }
 
 @media screen and (min-width: 576px) {
-    .tabs {
-        &-content {
-            & .forecast {
-                &-content {
-                    &:nth-child(2n+2) {
-                        display: flex;
+    .wrapper {
+        & .tabs {
+            &-content {
+                & .forecast {
+                    &-content {
+                        &:nth-child(2n+2) {
+                            display: flex;
+                        }
                     }
                 }
             }
@@ -55,3 +62,5 @@
         }
     }
 }
+
+
