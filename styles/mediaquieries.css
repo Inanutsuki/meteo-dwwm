@@ -5,6 +5,16 @@
   .search-form .btn {
     display: none;
   }
+  .wrapper .container {
+    margin: 15px;
+    padding: 15px;
+    width: unset;
+  }
+  .wrapper .container-fluid {
+    margin: 15px;
+    padding: 15px;
+    width: unset;
+  }
   .row.page {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -16,6 +26,23 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .tabs-content .forecast-content:nth-child(2n+2) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper ul {
+    margin-top: 15px;
+  }
+  .wrapper .temp_min-max {
+    margin-top: 15px;
   }
 }
 /*# sourceMappingURL=mediaquieries.css.map */

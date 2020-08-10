@@ -20,33 +20,37 @@
     <div class="wrapper">
         <div class="header">
             <nav class="navbar ">
-                <a class="navbar-brand" href="#">
-                    <img src="assets/logo.png" width="50" height="50" class="d-inline-block align-top" alt=""
+                <a class="navbar-brand" href="index.html">
+                    <img class="logo" src="assets/logo.png" width="50" height="50" class="d-inline-block align-top" alt=""
                         loading="lazy">
+                        Météo
                 </a>
-                <button class="btn btn-outline-success geoloc" type="submit">Géoloc</button>
+                <button class="btn btn-outline-success geoloc-btn" type="submit">Géoloc</button>
                 <form class="form-inline search-form">
-                    
-                    <input class="form-control input_city" type="text" placeholder="indiquez votre ville" aria-label="Search">
+
+                    <input class="form-control input_city" type="text" placeholder="indiquez votre ville"
+                        aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Trouver</button>
                 </form>
             </nav>
         </div>
         <div class="container">
             <h2 class="city-title"></h2>
-            <div class="row page">
-                <div class="col col-auto left order-2 order-sm-1">
+            <div class="row day_condition">
+                <div class="col col-auto left order-2 order-md-1">
                     <ul>
                         <li class="hour"></li>
-                        <li class="temperature"></li>
                         <li class="current_condition"></li>
                         <li class="humidity"></li>
                         <li class="wind_spd"></li>
                         <li class="wind_dir"></li>
                     </ul>
                 </div>
-                <div class="col col-auto right order-1 order-sm-2">
-                    <div class="current_condition_icon"></div>
+                <div class="col col-auto right order-1 order-md-2">
+                    <div class="current_day_condition">
+                        <div class="current_condition_icon"></div>
+                        <div class="temperature"></div>
+                    </div>
                     <div class="temp_min-max"></div>
                 </div>
             </div>
@@ -54,25 +58,55 @@
         <div class="container hour-by-hour-container">
             <div class="row hour-by-hour"></div>
         </div>
-        <div class="container-fluid">
+        <div class="container container-fluid">
             <h2 class="forecast-title">Les prévisions pour les 5 prochains jours</h2>
             <div class="tabs-wrapper">
                 <ul class="tabs">
-                    <li class="active"><a href="#day_1"><div class="link1"></div></a></li>
-                    <li><a href="#day_2"><div class="link2"></div></a></li>
-                    <li><a href="#day_3"><div class="link3"></div></a></li>
-                    <li><a href="#day_4"><div class="link4"></div></a></li>
-                    <li><a href="#day_5"><div class="link5"></div></a></li>
+                    <li class="active"><a href="#day_1">
+                            <div class="link1"></div>
+                        </a></li>
+                    <li><a href="#day_2">
+                            <div class="link2"></div>
+                        </a></li>
+                    <li><a href="#day_3">
+                            <div class="link3"></div>
+                        </a></li>
+                    <li><a href="#day_4">
+                            <div class="link4"></div>
+                        </a></li>
+                    <li><a href="#day_5">
+                            <div class="link5"></div>
+                        </a></li>
                 </ul>
                 <div class="tabs-content">
-                    <div id="day_2" class="row content2 tab-content">Sit amet, consectetur adipisicing elit. Consequatur perspiciatis aut consequuntur quo tempora quos tenetur doloremque, tempore animi et dolorem ipsa iusto veritatis voluptate quia architecto ullam. Vero, nostrum.</div>
-                    <div id="day_1" class="row content1 tab-content active">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui ab unde ipsum temporibus ipsam suscipit repellat natus! Magnam recusandae repudiandae reprehenderit tempore, vero soluta, excepturi, dignissimos fuga nulla esse iste!</div>
-                    <div id="day_3" class="row content3 tab-content">Consectetur adipisicing elit. Consequatur perspiciatis aut consequuntur quo tempora quos tenetur doloremque, tempore animi et dolorem ipsa iusto veritatis voluptate quia architecto ullam. Vero, nostrum.</div>
-                    <div id="day_4" class="row content4 tab-content">Consequatur perspiciatis aut consequuntur quo tempora quos tenetur doloremque, tempore animi et dolorem ipsa iusto veritatis voluptate quia architecto ullam. Vero, nostrum.</div>
-                    <div id="day_5" class="row content5 tab-content">Consequuntur quo tempora quos tenetur doloremque, tempore animi et dolorem ipsa iusto veritatis voluptate quia architecto ullam. Vero, nostrum.</div>
+                    <div id="day_2" class="row content2 tab-content">Sit amet, consectetur adipisicing elit.
+                        Consequatur perspiciatis aut consequuntur quo tempora quos tenetur doloremque, tempore animi
+                        et dolorem ipsa iusto veritatis voluptate quia architecto ullam. Vero, nostrum.</div>
+                    <div id="day_1" class="row content1 tab-content active">Lorem ipsum dolor, sit amet consectetur
+                        adipisicing elit. Qui ab unde ipsum temporibus ipsam suscipit repellat natus! Magnam
+                        recusandae repudiandae reprehenderit tempore, vero soluta, excepturi, dignissimos fuga nulla
+                        esse iste!</div>
+                    <div id="day_3" class="row content3 tab-content">Consectetur adipisicing elit. Consequatur
+                        perspiciatis aut consequuntur quo tempora quos tenetur doloremque, tempore animi et dolorem
+                        ipsa iusto veritatis voluptate quia architecto ullam. Vero, nostrum.</div>
+                    <div id="day_4" class="row content4 tab-content">Consequatur perspiciatis aut consequuntur quo
+                        tempora quos tenetur doloremque, tempore animi et dolorem ipsa iusto veritatis voluptate
+                        quia architecto ullam. Vero, nostrum.</div>
+                    <div id="day_5" class="row content5 tab-content">Consequuntur quo tempora quos tenetur
+                        doloremque, tempore animi et dolorem ipsa iusto veritatis voluptate quia architecto ullam.
+                        Vero, nostrum.</div>
                 </div>
             </div>
         </div>
+        <footer>
+            <div class="container container-fluid">
+                <div class="row">
+                    <div class="col-4"><img class="logo dwwm" src="assets/logo-DWWM.png" alt="logo de la formation DWWM"></div>
+                    <div class="col-4"><img class="logo github" src="assets/logo-github.png" alt="logo de github pages"></div>
+                </div>
+                <div class="row copyright">© 2020 Copyright</div>
+            </div>
+        </footer>
     </div>
 
     <!--Scripts bootstrap-->

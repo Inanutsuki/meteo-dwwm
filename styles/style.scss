@@ -9,6 +9,7 @@ html, body {
 h2 {
     font-size: 1.5rem;
     text-align: center;
+    margin: 0;
 }
 
 ul, li {
@@ -30,26 +31,84 @@ a {
 /*End reset CSS*/
 
 /*Variables*/
-$marginTop: 5px;
+$marginTop: 15px;
 
 /*End variables*/
 
+body {
+    background-image: linear-gradient(to bottom, #000537, #002b5b, #004e7d, #1c739e, #3d9abd, #48afcd, #57c5dd, #68dbeb, #62e4ef, #5dedf2, #5bf6f4, #5bfff4);
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+}
+
 .wrapper {
     font-family: 'Roboto', Helvetica, sans-serif;
-    color: #444;
+    color: #f2f2f2;
     max-width: 900px;
-    min-width: 768px;
+    min-width: 430px;
     margin: auto;
 
-    & .page {
+    & .container {
+        margin-top: 40px;
+    }
+
+    & .navbar {
+        &-brand {
+            margin: 0;
+            display: flex;
+            align-items: center;
+
+            & .logo {
+                margin-right: 5px;
+            }
+        }
+
+        & .geoloc-btn {
+            margin: 0;
+        }
+
+        & .input_city {
+            width: 170px;
+            padding-left: 10px;
+            margin-right: 5px;
+
+            &:focus {
+                border-color: unset;
+                box-shadow: unset;
+            }
+        }
+
+        & .btn {
+            &:focus {
+                box-shadow: unset;
+            }
+
+            &-outline-success {
+                &:focus {
+                    box-shadow: unset;
+                }
+            }
+        }
+    }
+
+    & .day_condition {
         display: flex;
         justify-content: space-around;
         align-items: center;
-    }
 
-    & .left {
-        li {
-            margin-top: $marginTop;
+        & .current_day_condition {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & .current_condition_icon {
+                width: auto;
+            }
+
+            & .temperature {
+                font-size: 90px;
+            }
         }
     }
 
@@ -58,20 +117,60 @@ $marginTop: 5px;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+        width: 320px;
+        margin-top: $marginTop;
 
         & .temp_min-max {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff69;
+            border-radius: 5px;
+            width: 90px;
+            padding: 1px 5px 0 5px;
+        }
+    }
+
+    & footer {
+        & .row {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
             margin-top: $marginTop;
+
+            & .col-4 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                & .logo {
+                    &.dwwm {
+                        width: 150px;
+                        height: auto;
+                    }
+
+                    &.github {
+                        height: 100px;
+                        width: auto;
+                    }
+                }
+            }
+
+            &.copyright {
+                color: #444;
+                margin-bottom: 15px;
+            }
         }
     }
 }
 
 .temp- {
     &min {
-        color: blue;
+        color: rgb(3, 63, 125);
     }
 
     &max {
-        color: red;
+        color: rgb(204, 5, 5);
     }
 }
 
@@ -95,8 +194,10 @@ $marginTop: 5px;
         z-index: 3;
         position: relative;
         padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        top: -5px;
+        background-color: rgb(66, 162, 196);
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
 
         & > div {
             width: max-content;
@@ -104,11 +205,23 @@ $marginTop: 5px;
 
         & .forecast {
             &-content {
-                display: inline-block;
-                margin-left: 15px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 0 5px;
+                box-sizing: border-box;
+                font-size: .9rem;
+                border-left: 1px solid black;
+
+                &:nth-child(2n+2) {
+                    display: none;
+                }
 
                 &:first-child {
                     margin-left: 0;
+                    display: block;
+                    border-left: none;
                 }
             }
 
@@ -128,28 +241,21 @@ $marginTop: 5px;
     & a {
         padding: 10px;
         display: inline-block;
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
 
         & [class^="link"] {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-
-            & .temp-min-max {
-                display: flex;
-                justify-content: space-between;
-
-                & .temp-min {
-                    margin-left: 5px;
-                }
-            }
+            font-size: .9rem;
         }
     }
 
     & .active {
         & a {
-            background-color: #f1f1f1;
+            background-color: rgb(66, 162, 196);
         }
     }
 }
@@ -159,10 +265,9 @@ $marginTop: 5px;
     display: flex;
     flex-wrap: nowrap;
     overflow-y: hidden;
-    padding: 5px;
 
     &_col {
-        padding: 5px;
+        padding: 0 5px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -180,7 +285,7 @@ $marginTop: 5px;
     }
 
     &_temp, &_hour {
-        font-size: 15px;
+        font-size: .9rem;
     }
 }
 
