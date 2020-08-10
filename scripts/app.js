@@ -1,3 +1,7 @@
+/**
+ * Déclaration des constantes, variables permettant de selectionner les éléments HTML.
+ */
+
 const city = document.querySelector('.city-title');
 const currentCondition = document.querySelector('.current_condition');
 const temperature = document.querySelector('.temperature');
@@ -12,6 +16,10 @@ const windDir = document.querySelector('.wind_dir');
 const hourByHourConainer = document.querySelector('.hour-by-hour-container');
 const geolocBtn = document.querySelector('.geoloc-btn');
 let hourByHour = document.querySelector('.hour-by-hour');
+
+/**
+ * Déclaration des varaibles en global utilisées dans les fonctions suivantes.
+ */
 
 let $cityName;
 let $currentCondition;
@@ -29,14 +37,19 @@ let $posLong;
 let $urlApi;
 let $myCity;
 
+/**
+ * Déclaration des tableaux en global utilisés pour créer les boucles lors de la gestion de récupération
+ * des données à l'aide des API.
+ */
+
 let $day = [];
 let $forecastData = [];
 let $hourlyData = [];
 let $fcstDayHourlyData = [];
 
-
-
-
+/**
+ * Fonction permettant de récupérer les données via l'API météo.
+ */
 
 function actionFetch() {
     fetch($url)
@@ -96,6 +109,10 @@ function actionFetch() {
         })
 }
 
+/**
+ * Fonction permettant de sotcker les données récupérées dans leurs variables à l'aide de boucles.
+ */
+
 function putInfoIn() {
     for (let i = 1; i <= 5; ++i) {
         const dayNumb = {
@@ -129,13 +146,15 @@ function putInfoIn() {
     }
 }
 
-// <div class="forecast-content"><div>Prévision pour</div><div class="forecast-img">Météo</div></img><div>Température (°C)</div><div>Vitesse du vent (km/h)</div><div>Direction du vent</div></div>
+/**
+ * Fonction permettant de stocker les données simples dans leurs variables.
+ */
 
 function setInfos() {
     city.innerHTML = $cityName;
     currentCondition.innerHTML = $currentCondition;
     currentConditionIcon.innerHTML = `<img src=${$currentConditionIcon}>`;
-    temperature.innerHTML =$temperature + `°`;
+    temperature.innerHTML = $temperature + `°`;
     hour.innerHTML = `Prévision pour ${$hour}h`;
     humidity.innerHTML = `Il y a ${$humidity}% d'humidité`;
     tempMinMax.innerHTML = `<div class="temp-max">${$forecastData[0].tempMaxDay}°C</div><div class="temp-min">${$forecastData[0].tempMinDay}°C</div>`;
@@ -145,6 +164,26 @@ function setInfos() {
     putInfoIn();
     return;
 }
+
+/**
+ * Fonction permettant de reset la div pour générer les conditions heures par heures à chaques
+ * ville demandées. 
+ */
+
+function addNew() {
+    let child = hourByHourConainer.firstElementChild;
+    hourByHourConainer.removeChild(child);
+    let parent = document.createElement('div');
+    parent.className = 'hour-by-hour';
+    hourByHourConainer.appendChild(parent);
+    hourByHour = document.querySelector('.hour-by-hour');
+    $hourlyData = [];
+}
+
+/**
+ * Fonction permettant de récupérer la longitude, la latitude et ensuite à l'aide d'une API
+ * de récuperer la ville qui correspond si la géolocalisation est activée.
+ */
 
 function successGetPos(position) {
     $posLat = position.coords.latitude, $posLong = position.coords.longitude;
@@ -166,12 +205,22 @@ function successGetPos(position) {
         })
 }
 
+/**
+ * Fonctoin permettant de parametrer une ville par défaut si la géolocalisation n'est pas activée
+ * et de généré un message d'érreur celon l'érreur rencontrées.
+ */
+
 function errorGetPos(err) {
     console.warn(`ERREUR (${err.code}): ${err.message}`);
     $city = 'toulon';
     $url = `https://www.prevision-meteo.ch/services/json/` + $city;
     actionFetch();
 }
+
+/**
+ * Fonction permettant de verifier si la géolocalisation est activé. Si oui la fonction
+ * successGetPos() se lance, si non la fonction errorGetPos() se lance.
+ */
 
 function getPos() {
     if ("geolocation" in navigator) {
@@ -182,17 +231,11 @@ function getPos() {
     }
 }
 
-function addNew() {
-    let child = hourByHourConainer.firstElementChild;
-    hourByHourConainer.removeChild(child);
-    let parent = document.createElement('div');
-    parent.className = 'hour-by-hour';
-    hourByHourConainer.appendChild(parent);
-    hourByHour = document.querySelector('.hour-by-hour');
-    $hourlyData = [];
-}
-
 getPos();
+
+/**
+ * Ajout de differentes écoutes d'événements.
+ */
 
 geolocBtn.addEventListener('click', function (event) {
     event.preventDefault();
@@ -213,17 +256,18 @@ form.addEventListener('submit', function (event) {
     event.preventDefault();
 })
 
-/*scritpts a mettre dans un nouveau script*/
-
-/** Mediaquieries **/
-
-/** End mediaquieries **/
-
-
-/** Onglets **/
+/** 
+ * Les onglets
+ */
 
 const tabs = document.querySelectorAll('.tabs a');
 let li;
+
+/**
+ * Fonction permattant d'ajouter la classe "active" a l'onglet et au bloc actif et de
+ * la retirer aux éléments précédement séléctionnés à l'aide de la fonction addEventListener()
+ * qui permet de le faire au survole de la souris.
+ */
 
 function tabsNav() {
     function setClassActive(link) {
@@ -247,12 +291,4 @@ function tabsNav() {
 
 tabsNav();
 
-/*End onglets*/
-
-/**Heure par heure**/
-function hourNow() {
-    var date = new Date();
-    var hour = date.getHours();
-    return hour;
-};
-/**End heure par heure**/
+/*Fin des onglets*/

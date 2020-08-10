@@ -29,8 +29,6 @@ a:hover {
 }
 
 /*End reset CSS*/
-/*Variables*/
-/*End variables*/
 body {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#000537), color-stop(#002b5b), color-stop(#004e7d), color-stop(#1c739e), color-stop(#3d9abd), color-stop(#48afcd), color-stop(#57c5dd), color-stop(#68dbeb), color-stop(#62e4ef), color-stop(#5dedf2), color-stop(#5bf6f4), to(#5bfff4));
   background-image: linear-gradient(to bottom, #000537, #002b5b, #004e7d, #1c739e, #3d9abd, #48afcd, #57c5dd, #68dbeb, #62e4ef, #5dedf2, #5bf6f4, #5bfff4);
@@ -100,6 +98,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-bottom: 40px;
 }
 
 .wrapper .day_condition .current_day_condition {
@@ -118,11 +117,15 @@ body {
   width: auto;
 }
 
+.wrapper .day_condition .current_day_condition .current_condition_icon img {
+  width: 100px;
+}
+
 .wrapper .day_condition .current_day_condition .temperature {
   font-size: 90px;
 }
 
-.wrapper .right {
+.wrapper .day_condition .right {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -139,7 +142,7 @@ body {
   margin-top: 15px;
 }
 
-.wrapper .right .temp_min-max {
+.wrapper .day_condition .right .temp_min-max {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -163,6 +166,47 @@ body {
   color: #cc0505;
 }
 
+.wrapper .hour-by-hour {
+  overflow: scroll;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  overflow-y: hidden;
+}
+
+.wrapper .hour-by-hour_col {
+  padding: 0 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-left: solid black 1px;
+}
+
+.wrapper .hour-by-hour_col:first-child {
+  border-left: none;
+}
+
+.wrapper .hour-by-hour_img {
+  width: 40px;
+  height: auto;
+}
+
+.wrapper .hour-by-hour_temp, .wrapper .hour-by-hour_hour {
+  font-size: .9rem;
+}
+
 .wrapper .tabs {
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -170,7 +214,7 @@ body {
 }
 
 .wrapper .tabs-wrapper {
-  margin-top: 15px;
+  margin-top: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -206,7 +250,19 @@ body {
   border-radius: 5px;
 }
 
-.wrapper .tabs-content > div {
+.wrapper .tabs-content .tab-content {
+  display: none;
+}
+
+.wrapper .tabs-content .tab-content.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+.wrapper .tabs-content > .row {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
@@ -285,59 +341,6 @@ body {
 
 .wrapper .tabs .active a {
   background-color: #42a2c4;
-}
-
-.wrapper .hour-by-hour {
-  overflow: scroll;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  overflow-y: hidden;
-}
-
-.wrapper .hour-by-hour_col {
-  padding: 0 5px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border-left: solid black 1px;
-}
-
-.wrapper .hour-by-hour_col:first-child {
-  border-left: none;
-}
-
-.wrapper .hour-by-hour_img {
-  width: 40px;
-  height: auto;
-}
-
-.wrapper .hour-by-hour_temp, .wrapper .hour-by-hour_hour {
-  font-size: .9rem;
-}
-
-.wrapper .tab-content {
-  display: none;
-}
-
-.wrapper .tab-content.active {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
 }
 
 .wrapper footer .row {

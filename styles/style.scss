@@ -30,12 +30,6 @@ a {
 
 /*End reset CSS*/
 
-/*Variables*/
-
-$marginTop: 15px;
-
-/*End variables*/
-
 body {
     background-image: linear-gradient(to bottom, #000537, #002b5b, #004e7d, #1c739e, #3d9abd, #48afcd, #57c5dd, #68dbeb, #62e4ef, #5dedf2, #5bf6f4, #5bfff4);
     background-attachment: fixed;
@@ -97,6 +91,7 @@ body {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        margin-bottom: 40px;
 
         & .current_day_condition {
             display: flex;
@@ -105,30 +100,34 @@ body {
 
             & .current_condition_icon {
                 width: auto;
+
+                & img {
+                    width: 100px;
+                }
             }
 
             & .temperature {
                 font-size: 90px;
             }
         }
-    }
 
-    & .right {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        width: 320px;
-        margin-top: $marginTop;
-
-        & .temp_min-max {
+        & .right {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: space-around;
             align-items: center;
-            background-color: #ffffff69;
-            border-radius: 5px;
-            width: 90px;
-            padding: 1px 5px 0 5px;
+            width: 320px;
+            margin-top: 15px;
+
+            & .temp_min-max {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #ffffff69;
+                border-radius: 5px;
+                width: 90px;
+                padding: 1px 5px 0 5px;
+            }
         }
     }
 
@@ -142,10 +141,40 @@ body {
         }
     }
 
+    & .hour-by-hour {
+        overflow: scroll;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-y: hidden;
+
+        &_col {
+            padding: 0 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-left: solid black 1px;
+
+            &:first-child {
+                border-left: none;
+            }
+        }
+
+        &_img {
+            width: 40px;
+            height: auto;
+        }
+
+        &_temp, &_hour {
+            font-size: .9rem;
+        }
+    }
+
     & .tabs {
         width: max-content;
+
         &-wrapper {
-            margin-top: $marginTop;
+            margin-top: 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -168,7 +197,16 @@ body {
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
             border-radius: 5px;
 
-            & > div {
+            & .tab-content {
+                display: none;
+
+                &.active {
+                    display: flex;
+                    flex-wrap: nowrap;
+                }
+            }
+
+            & > .row {
                 width: max-content;
             }
 
@@ -229,52 +267,12 @@ body {
         }
     }
 
-    & .hour-by-hour {
-        overflow: scroll;
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-y: hidden;
-
-        &_col {
-            padding: 0 5px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-left: solid black 1px;
-
-            &:first-child {
-                border-left: none;
-            }
-        }
-
-        &_img {
-            width: 40px;
-            height: auto;
-        }
-
-        &_temp, &_hour {
-            font-size: .9rem;
-        }
-    }
-
-    & .tab {
-        &-content {
-            display: none;
-
-            &.active {
-                display: flex;
-                flex-wrap: nowrap;
-            }
-        }
-    }
-
     & footer {
         & .row {
             display: flex;
             justify-content: space-evenly;
             align-items: center;
-            margin-top: $marginTop;
+            margin-top: 15px;
 
             & .col-4 {
                 display: flex;
@@ -305,13 +303,13 @@ body {
 ::-webkit-scrollbar {
     width: 12px;
 }
- 
+
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
 }
- 
+
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
