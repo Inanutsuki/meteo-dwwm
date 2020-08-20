@@ -1,0 +1,53 @@
+@media screen and (max-width: 768px) {
+  .wrapper .container {
+    padding: 15px;
+    width: unset;
+  }
+  .wrapper .container-fluid {
+    padding: 15px;
+    width: unset;
+  }
+  .wrapper .navbar {
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  .wrapper .navbar-brand {
+    display: none;
+  }
+  .wrapper .search-form .input_city {
+    padding: 0 5px;
+  }
+  .wrapper .search-form .btn {
+    display: none;
+  }
+  .row.page {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .wrapper .tabs-content .forecast-content:nth-child(2n+2) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper ul {
+    margin-top: 15px;
+  }
+  .wrapper .temp_min-max {
+    margin-top: 15px;
+  }
+}
+/*# sourceMappingURL=mediaquieries.css.map */

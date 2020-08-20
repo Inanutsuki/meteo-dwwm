@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metéo DWWM</title>
+
+    <!--CSS bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!--CSS Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <!--CSS perso-->
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/mediaquieries.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <nav class="navbar ">
+                <a class="navbar-brand" href="index.html">
+                    <img class="logo d-inline-block align-top" src="assets/logo.png" width="50" height="50" alt=""
+                        loading="lazy">
+                    Météo
+                </a>
+                <button class="btn btn-outline-success geoloc-btn" type="submit">Géoloc</button>
+                <form class="form-inline search-form">
+
+                    <input class="form-control input_city" id="autoComplete" tabindex="1" type="text"
+                        placeholder="indiquez votre ville" aria-label="Search" autocomplete="off">
+                    <div class="selection"></div>
+                    <button class="btn btn-outline-success" type="submit">Trouver</button>
+                </form>
+            </nav>
+        </div>
+        <div class="container">
+            <h2 class="city-title"></h2>
+            <div class="row day_condition">
+                <div class="col col-auto left order-2 order-md-1">
+                    <ul>
+                        <li class="hour"></li>
+                        <li class="current_condition"></li>
+                        <li class="humidity"></li>
+                        <li class="wind_spd"></li>
+                        <li class="wind_dir"></li>
+                    </ul>
+                </div>
+                <div class="col col-auto right order-1 order-md-2">
+                    <div class="current_day_condition">
+                        <div class="current_condition_icon"></div>
+                        <div class="temperature"></div>
+                    </div>
+                    <div class="temp_min-max"></div>
+                </div>
+            </div>
+        </div>
+        <h2>Les conditions heures par heures</h2>
+        <div class="container hour-by-hour-container">
+            <div class="row hour-by-hour"></div>
+        </div>
+        <div class="container container-fluid">
+            <h2 class="forecast-title">Les prévisions pour les 5 prochains jours</h2>
+            <div class="tabs-wrapper">
+                <ul class="tabs">
+                    <li class="active"><a href="#day_1">
+                            <div class="link1"></div>
+                        </a></li>
+                    <li><a href="#day_2">
+                            <div class="link2"></div>
+                        </a></li>
+                    <li><a href="#day_3">
+                            <div class="link3"></div>
+                        </a></li>
+                    <li><a href="#day_4">
+                            <div class="link4"></div>
+                        </a></li>
+                    <li><a href="#day_5">
+                            <div class="link5"></div>
+                        </a></li>
+                </ul>
+                <div class="tabs-content">
+                    <div id="day_2" class="row content2 tab-content"></div>
+                    <div id="day_1" class="row content1 tab-content active"></div>
+                    <div id="day_3" class="row content3 tab-content"></div>
+                    <div id="day_4" class="row content4 tab-content"></div>
+                    <div id="day_5" class="row content5 tab-content"></div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container container-fluid">
+                <div class="row">
+                    <div class="col-4"><img class="logo dwwm" src="assets/logo-DWWM.png"
+                            alt="logo de la formation DWWM"></div>
+                    <div class="col-4"><img class="logo github" src="assets/logo-github.png" alt="logo de github pages">
+                    </div>
+                </div>
+                <div class="row copyright">© 2020 Copyright</div>
+            </div>
+        </footer>
+    </div>
+
+    <!--Scripts bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    
+    <!-- Scripts autoCompleteJs -->
+    <script src="scripts/autoComplete.js"></script>
+    <script src="scripts/index.js"></script>
+    
+    <!--Scripts perso-->
+    <script src="scripts/app.js"></script>
+</body>
+</html>
