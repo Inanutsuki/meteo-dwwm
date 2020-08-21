@@ -82,7 +82,7 @@ const autoCompletejs = new autoComplete({
 
 
     $city = selection
-    resetHourlyDataAndHTML();
+    resetHourByHourHTML();
     fetchWeatherData($city);
 
 
