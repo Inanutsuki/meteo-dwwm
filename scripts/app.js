@@ -1,12 +1,8 @@
-/**
- * Déclaration des constantes, variables permettant de selectionner les éléments HTML.
- */
-
 const city = document.querySelector('.city-title');
 const currentCondition = document.querySelector('.current_condition');
 const temperature = document.querySelector('.temperature');
 const currentConditionIcon = document.querySelector('.current_condition_icon');
-const submitBtn = document.querySelector('.submit');
+const searchBtn = document.querySelector('.search');
 const inputCity = document.querySelector('.input_city');
 const hour = document.querySelector('.hour');
 const humidity = document.querySelector('.humidity');
@@ -15,7 +11,7 @@ const windSpd = document.querySelector('.wind_spd');
 const windDir = document.querySelector('.wind_dir');
 const hourByHourContainer = document.querySelector('.hour-by-hour-container');
 const geolocBtn = document.querySelector('.geoloc-btn');
-const autoCompletBox = document.querySelector('.autocompletion-box');
+const autoCompletList = document.querySelector('#autoComplete_list');
 let hourByHour = document.querySelector('.hour-by-hour');
 
 let $cityName;
@@ -240,13 +236,18 @@ function updateDynamicHTML() {
     }
 }
 
-geolocBtn.addEventListener('click', function (event) {
-    event.preventDefault();
-    resetHourByHourHTML();
-    getGPSPosition();
-});
+function manageFocus() {
+    inputCity.addEventListener('focusin', function () {
+        autoCompletList.style.visibility = "visible";
+    });
+
+    inputCity.addEventListener('focusout', function () {
+        autoCompletList.style.visibility = "hidden";
+    });
+}
 
 inputCity.addEventListener('keyup', function (event) {
+    manageFocus();
     if (event.keyCode == 13) {
         event.preventDefault();
         const $city = inputCity.value;
@@ -255,12 +256,20 @@ inputCity.addEventListener('keyup', function (event) {
     }
 });
 
-submitBtn.addEventListener('click', function (event) {
+geolocBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    resetHourByHourHTML();
+    getGPSPosition();
+});
+
+searchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     const $city = inputCity.value;
     resetHourByHourHTML();
     fetchWeatherData($city);
 })
+
+
 
 /** 
  * Les onglets

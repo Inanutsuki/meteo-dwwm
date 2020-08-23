@@ -9,7 +9,7 @@ const autoCompletejs = new autoComplete({
   data: {
     src: async function () {
       // Loading placeholder text
-      document.querySelector("#autoComplete").setAttribute("placeholder", "Loading...");
+      document.querySelector("#autoComplete").setAttribute("placeholder", "Chargement...");
       // Fetch External Data Source
       const source = await fetch("https://cors-anywhere.herokuapp.com/https://www.prevision-meteo.ch/services/json/list-cities");
       const data = await source.json();
@@ -77,17 +77,9 @@ const autoCompletejs = new autoComplete({
     // document.querySelector("#autoComplete").setAttribute("placeholder", selection);
     // Concole log autoComplete data feedback
     console.log(feedback);
-
-
-
-
     $city = selection
     resetHourByHourHTML();
     fetchWeatherData($city);
-
-
-
-
   },
 });
 
