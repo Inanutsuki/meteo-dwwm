@@ -1,6 +1,6 @@
 // autoComplete.js on type event emitter
 document.querySelector("#autoComplete").addEventListener("autoComplete", function (event) {
-  console.log(event.detail);
+  // console.log(event.detail);
   // console.log(autoCompletejs);
 });
 
@@ -76,7 +76,7 @@ const autoCompletejs = new autoComplete({
     // Change placeholder with the selected value
     // document.querySelector("#autoComplete").setAttribute("placeholder", selection);
     // Concole log autoComplete data feedback
-    console.log(feedback);
+    // console.log(feedback);
     $city = selection
     resetHourByHourHTML();
     fetchWeatherData($city);
@@ -100,26 +100,14 @@ document.querySelector(".toggeler").addEventListener("click", function () {
   }
 });
 // Toggle results list and other elements
-const action = function (action) {
-  const github = document.querySelector(".github-corner");
-  const title = document.querySelector("h1");
-  const mode = document.querySelector(".mode");
-  const selection = document.querySelector(".selection");
-  const footer = document.querySelector(".footer");
-  if (action === "dim") {
-    github.style.opacity = 1;
-    title.style.opacity = 1;
-    mode.style.opacity = 1;
-    selection.style.opacity = 1;
-    footer.style.opacity = 1;
-  } else {
-    github.style.opacity = 0.1;
-    title.style.opacity = 0.3;
-    mode.style.opacity = 0.2;
-    selection.style.opacity = 0.1;
-    footer.style.opacity = 0.1;
-  }
-};
+// const action = function (action) {
+  // const selection = document.querySelector(".selection");
+  // if (action === "dim") {
+    // selection.style.opacity = 1;
+  // } else {
+    // selection.style.opacity = 0.1;
+//   }
+// };
 
 // Toggle event for search input
 // showing & hidding results list onfocus / blur
@@ -128,12 +116,12 @@ const action = function (action) {
   document.querySelector("#autoComplete").addEventListener(eventType, function () {
     // Hide results list & show other elemennts
     if (eventType === "blur") {
-      action("dim");
-      resultsList.style.display = "none";
+      // action("dim");
+      resultsList.style.visibility = "hidden";
     } else if (eventType === "focus") {
       // Show results list & hide other elemennts
-      action("light");
-      resultsList.style.display = "block";
+      // action("light");
+      resultsList.style.visibility = "visible";
     }
   });
 });

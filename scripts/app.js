@@ -219,14 +219,14 @@ function updateDynamicHTML() {
                                     `;
             $day[i].dayContent.innerHTML = `
                                     <div class="forecast-content"><div>Heure</div><div class="forecast-img">Météo</div><div>Température (°C)</div><div>Vent (km/h)</div><div>Sens du vent</div><div>Humidité (%)</div></div>
-                                    <div class="forecast-content"><div>0h00</div><img class="forecast-img" src="${$fcstDayHourlyData[i].fcstDayData0.icon}"></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].windDir}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 0].humidity}</div></div>
-                                    <div class="forecast-content"><div>3h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData1.icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].windDir}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 1].humidity}</div></div>
-                                    <div class="forecast-content"><div>5h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData2.icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].windDir}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 2].humidity}</div></div>
-                                    <div class="forecast-content"><div>9h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData3.icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].windDir}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 3].humidity}</div></div>
-                                    <div class="forecast-content"><div>12h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData4.icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].windDir}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 4].humidity}</div></div>
-                                    <div class="forecast-content"><div>15h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData5.icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].windDir}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 5].humidity}</div></div>
-                                    <div class="forecast-content"><div>18h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData6.icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].windDir}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 6].humidity}</div></div>
-                                    <div class="forecast-content"><div>21h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData7.icon}></img><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].temp}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].windSpd}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].windDir}</div><div>${$fcstDayHourlyData[i]['fcstDayData' + 7].humidity}</div></div>
+                                    <div class="forecast-content"><div>0h00</div><img class="forecast-img" src="${$fcstDayHourlyData[i].fcstDayData0.icon}"></img><div>${$fcstDayHourlyData[i].fcstDayData0.temp}</div><div>${$fcstDayHourlyData[i].fcstDayData0.windSpd}</div><div>${$fcstDayHourlyData[i].fcstDayData0.windDir}</div><div>${$fcstDayHourlyData[i].fcstDayData0.humidity}</div></div>
+                                    <div class="forecast-content"><div>3h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData1.icon}></img><div>${$fcstDayHourlyData[i].fcstDayData1.temp}</div><div>${$fcstDayHourlyData[i].fcstDayData1.windSpd}</div><div>${$fcstDayHourlyData[i].fcstDayData1.windDir}</div><div>${$fcstDayHourlyData[i].fcstDayData1.humidity}</div></div>
+                                    <div class="forecast-content"><div>5h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData2.icon}></img><div>${$fcstDayHourlyData[i].fcstDayData2.temp}</div><div>${$fcstDayHourlyData[i].fcstDayData2.windSpd}</div><div>${$fcstDayHourlyData[i].fcstDayData2.windDir}</div><div>${$fcstDayHourlyData[i].fcstDayData2.humidity}</div></div>
+                                    <div class="forecast-content"><div>9h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData3.icon}></img><div>${$fcstDayHourlyData[i].fcstDayData3.temp}</div><div>${$fcstDayHourlyData[i].fcstDayData3.windSpd}</div><div>${$fcstDayHourlyData[i].fcstDayData3.windDir}</div><div>${$fcstDayHourlyData[i].fcstDayData3.humidity}</div></div>
+                                    <div class="forecast-content"><div>12h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData4.icon}></img><div>${$fcstDayHourlyData[i].fcstDayData4.temp}</div><div>${$fcstDayHourlyData[i].fcstDayData4.windSpd}</div><div>${$fcstDayHourlyData[i].fcstDayData4.windDir}</div><div>${$fcstDayHourlyData[i].fcstDayData4.humidity}</div></div>
+                                    <div class="forecast-content"><div>15h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData5.icon}></img><div>${$fcstDayHourlyData[i].fcstDayData5.temp}</div><div>${$fcstDayHourlyData[i].fcstDayData5.windSpd}</div><div>${$fcstDayHourlyData[i].fcstDayData5.windDir}</div><div>${$fcstDayHourlyData[i].fcstDayData5.humidity}</div></div>
+                                    <div class="forecast-content"><div>18h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData6.icon}></img><div>${$fcstDayHourlyData[i].fcstDayData6.temp}</div><div>${$fcstDayHourlyData[i].fcstDayData6.windSpd}</div><div>${$fcstDayHourlyData[i].fcstDayData6.windDir}</div><div>${$fcstDayHourlyData[i].fcstDayData6.humidity}</div></div>
+                                    <div class="forecast-content"><div>21h00</div><img class="forecast-img" src=${$fcstDayHourlyData[i].fcstDayData7.icon}></img><div>${$fcstDayHourlyData[i].fcstDayData7.temp}</div><div>${$fcstDayHourlyData[i].fcstDayData7.windSpd}</div><div>${$fcstDayHourlyData[i].fcstDayData7.windDir}</div><div>${$fcstDayHourlyData[i].fcstDayData7.humidity}</div></div>
                                     `;
         }
     }
@@ -236,18 +236,9 @@ function updateDynamicHTML() {
     }
 }
 
-function manageFocus() {
-    inputCity.addEventListener('focusin', function () {
-        autoCompletList.style.visibility = "visible";
-    });
-
-    inputCity.addEventListener('focusout', function () {
-        autoCompletList.style.visibility = "hidden";
-    });
-}
 
 inputCity.addEventListener('keyup', function (event) {
-    manageFocus();
+    manageFocus(inputCity);
     if (event.keyCode == 13) {
         event.preventDefault();
         const $city = inputCity.value;
@@ -256,6 +247,14 @@ inputCity.addEventListener('keyup', function (event) {
     }
 });
 
+function manageFocus(element) {
+    element.addEventListener('focusin', function () {
+        autoCompletList.style.visibility = "visible";
+    });
+    element.addEventListener('focusout', function () {
+        autoCompletList.style.visibility = "hidden";
+    });
+}
 geolocBtn.addEventListener('click', function (event) {
     event.preventDefault();
     resetHourByHourHTML();
@@ -269,13 +268,9 @@ searchBtn.addEventListener('click', function (event) {
     fetchWeatherData($city);
 })
 
-
-
 /** 
  * Les onglets
  */
-
-
 
 function manageTabHover() {
     const tabs = document.querySelectorAll('.tabs a');
