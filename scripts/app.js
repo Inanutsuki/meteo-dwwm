@@ -47,11 +47,12 @@ function onGetGPSPositionSuccess(position) {
             return response.json();
         })
         .then(function (response) {
-            resetHourByHourHTML();
+            resetHourByHourHTML();        
             fetchWeatherData(response[0].nom);
         })
         .catch(function (error) {
             console.log("Erreur api: " + error);
+            fetchWeatherData('toulon');
         })
 }
 
@@ -80,7 +81,8 @@ function fetchWeatherData(cityName) {
             updateHTML();
         })
         .catch(function (error) {
-            alert("Cette ville n'éxiste pas ou n'est pas répertoriée." + error);
+            alert("Cette ville n'éxiste pas ou n'est pas répertoriée. Veuillez éssayer sans déterminant (ex: le, la les...");
+            fetchWeatherData('toulon');
         })
 }
 
@@ -244,6 +246,7 @@ inputCity.addEventListener('keyup', function (event) {
         const $city = inputCity.value;
         resetHourByHourHTML();
         fetchWeatherData($city);
+        autoCompletList.style.visibility = "hidden"
     }
 });
 
